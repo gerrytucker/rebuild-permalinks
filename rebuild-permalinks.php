@@ -5,7 +5,7 @@ Plugin URI: https://github.com/gerrytucker/rebuild--permalinks
 Description: Rebuild Permalinks
 Author: Gerry Tucker
 Author URI: http://gerrytucker.co.uk/
-Version: 0.1.1
+Version: 0.1.2
 License: GPLv2 or later
 GitHub Plugin URI: https://github.com/gerrytucker/rebuild--permalinks
 GitHub Branch: develop
