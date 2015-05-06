@@ -73,13 +73,13 @@ function _clear_diacritics( $post_title ) {
 		
 		<div id="message" class="updated fade">
 			<p>
-				<?php echo $message; ?>
+				<?php _e($message); ?>
 			</p>
 		</div>
 
 <?php endif; ?>
 		
-		<form action="#" method="post" id="rebuild_permalinks_form">
+		<form action="" method="post" id="rebuild_permalinks_form">
 			
 			<table class="form-table">
 				
