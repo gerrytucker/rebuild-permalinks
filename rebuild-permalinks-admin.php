@@ -1,5 +1,12 @@
 <?php
 
+$message = '';
+
+if ( isset( $_POST['submit'] ) ) {
+	$count = rebuild_permalinks( $_POST['post_type'] );
+	$message = $count . 'permalinks were rebuilt for all posts of type: <strong>' . $_POST['post_type'] . '</strong>';
+}
+
 function rebuild_permalinks( $post_type = 'post' ) {
 	
 	global $wpdb;
@@ -62,21 +69,16 @@ function _clear_diacritics( $post_title ) {
 		<?php screen_icon(); ?>
 		<h2><?php _e('Rebuild Permalinks'); ?></h2>
 
-<?php
-if ( isset( $_POST['submit'] ) ) {
-	$count = rebuild_permalinks( $_POST['post_type'] );
-?>
+<?php if ( $message !== '' ) : ?>
 		
 		<div id="message" class="updated fade">
 			<p>
-				<?php printf( __( '%1$s permalinks were rebuild for all posts of type: <strong>%2$s</strong>' ), $count, $_POST['post_type'] ); ?>
+				<?php echo $message; ?>
 			</p>
 		</div>
 
-<?php
-}
-?>
-
+<?php endif; ?>
+		
 		<form action="#" method="post" id="rebuild_permalinks_form">
 			
 			<table class="form-table">
