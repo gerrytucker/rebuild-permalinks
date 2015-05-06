@@ -2,10 +2,10 @@
 /*
 Plugin Name: WP-Rebuild Permalinks
 Plugin URI: https://github.com/gerrytucker/wp-rebuild-permalinks
-Description: Rebuild Wordpress Database Permalinks
+Description: Rebuild Permalinks
 Author: Gerry Tucker
 Author URI: http://gerrytucker.co.uk/
-Version: 0.0.3
+Version: 0.0.5
 License: GPLv2 or later
 GitHub Plugin URI: https://github.com/gerrytucker/wp-rebuild-permalinks
 GitHub Branch: develop
@@ -56,7 +56,7 @@ function rebuild_permalinks_callback() {
 				
 			</table>
 
-			<p>Make sure you have a backup of your WordPress database before cleanup!</p>
+			<p>Make sure you have a backup of your WordPress database before rebuilding permalinks!</p>
 			<p>
 				<input type="submit" name="submit" class="button-primary" style="width: 300px;" value="<?php _e('Rebuild Selected Permalinks'); ?>"
 							 onclick='if (!window.confirm("<?php _e('Are you sure you want to do this?'); ?>")) return false;'>
