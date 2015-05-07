@@ -5,7 +5,7 @@ Plugin URI: http://gerrytucker.co.uk/wp-plugins/rebuild-permalinks.zip
 Description: Rebuild Permalinks
 Author: Gerry Tucker
 Author URI: http://gerrytucker.co.uk/
-Version: 0.3
+Version: 0.9
 License: GPLv2 or later
 */
 
@@ -29,8 +29,8 @@ function rebuild_permalinks_admin() {
 	$message = '';
 
 	if ( isset( $_POST['submit'] ) ) {
-		$count = rebuild_permalinks( $_POST['post_type'] );
-		$message = $count . 'permalinks were rebuilt for all posts of type: <strong>' . $_POST['post_type'] . '</strong>';
+		$count = rebuild_permalinks( $_POST['posttype'] );
+		$message = $count . ' permalinks were rebuilt for all posts of type: <strong>' . $_POST['posttype'] . '</strong>';
 	}
 ?>
 
@@ -54,15 +54,15 @@ function rebuild_permalinks_admin() {
 				
 				<tr>
 					<th scope="row">
-						<label for="post_type">Select Post Type</label>
+						<label for="posttype">Select Post Type</label>
 					</th>
 					<td>
-						<select name="post_type">
+						<select name="posttype">
 <?php
-	$post_types = get_post_types( array( 'public' => true ), 'names' );
-	foreach( $post_types as $post_type ) :
+	$posttypes = get_post_types( array( 'public' => true ), 'names' );
+	foreach( $posttypes as $posttype ) :
 ?>
-							<option value="<?php echo $post_type; ?>"><?php echo ucfirst( strtolower( $post_type ) ); ?></option>
+							<option value="<?php echo $posttype; ?>"><?php echo ucfirst( strtolower( $posttype ) ); ?></option>
 <?php
 	endforeach;
 ?>
@@ -85,7 +85,7 @@ function rebuild_permalinks_admin() {
 <?php
 }
 
-function rebuild_permalinks( $post_type = 'post' ) {
+function rebuild_permalinks( $posttype = 'post' ) {
 	
 	global $wpdb;
 	
@@ -93,7 +93,7 @@ function rebuild_permalinks( $post_type = 'post' ) {
 		"SELECT id, post_title
 		FROM $wpdb->posts
 		WHERE post_status = 'publish'
-		AND post_type = '$post_type'"
+		AND posttype = '$posttype'"
 	);
 	
 	$count = 0;
