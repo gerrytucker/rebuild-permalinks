@@ -10,7 +10,7 @@ Rebuild WordPress Permalinks.
 
 == Description ==
 
-This WordPress plugin will rebuild the following permalinks based on the title:
+This WordPress plugin will rebuild the permalinks based on the post title for the following post types:
 
 * Posts.
 
