@@ -3,7 +3,7 @@ Contributors: gerrygooner
 Tags: rebuild, permalinks, posts, pages, attachments, database
 Requires at least: 3.0
 Tested up to: 4.2.1
-Stable tag: 0.2
+Stable tag: 0.9
 License: GPLv2 or later
 
 Rebuild WordPress Permalinks.
@@ -38,5 +38,5 @@ Have any questions? Leave them in the comments!
 
 == Changelog ==
 
-= 1.0 =
-* Initial release.
+= 0.9 =
+* Development phase.

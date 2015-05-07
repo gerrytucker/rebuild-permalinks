@@ -1,23 +1,91 @@
 <?php
 /*
 Plugin Name: Rebuild Permalinks
-Plugin URI: https://github.com/gerrytucker/rebuild--permalinks
+Plugin URI: http://gerrytucker.co.uk/wp-plugins/rebuild-permalinks.zip
 Description: Rebuild Permalinks
 Author: Gerry Tucker
 Author URI: http://gerrytucker.co.uk/
-Version: 0.2
+Version: 0.9
 License: GPLv2 or later
-GitHub Plugin URI: https://github.com/gerrytucker/rebuild--permalinks
-GitHub Branch: develop
 */
 
 function rebuild_permalinks_admin_actions() {
-	add_options_page('Rebuild Permalinks', 'Rebuild Permalinks', 'administrator', 'rebuild-permalinks', 'rebuild_permalinks_admin');
+
+	add_submenu_page(
+		'options-general.php',
+		__('Rebuild Permalinks'),
+		__('Rebuild Permalinks'),
+		'manage_options',
+		'rebuild-permalinks',
+		'rebuild_permalinks_admin'
+	);
+	
 }
 
 add_action('admin_menu', 'rebuild_permalinks_admin_actions');
 
-function rebuild_permalinks( $post_type = 'post' ) {
+function rebuild_permalinks_admin() {
+
+	$message = '';
+
+	if ( isset( $_POST['submit'] ) ) {
+		$count = rebuild_permalinks( $_POST['posttype'] );
+		$message = $count . ' permalinks were rebuilt for all posts of type: <strong>' . $_POST['posttype'] . '</strong>';
+	}
+?>
+
+	<div class="wrap" id="rebuild-permalinks-settings">
+		<?php screen_icon(); ?>
+		<h2><?php _e('Rebuild Permalinks'); ?></h2>
+
+<?php if ( $message !== '' ) : ?>
+		
+		<div id="message" class="updated fade">
+			<p>
+				<?php _e($message); ?>
+			</p>
+		</div>
+
+<?php endif; ?>
+		
+		<form action="" method="post" id="rebuild_permalinks_form">
+			
+			<table class="form-table">
+				
+				<tr>
+					<th scope="row">
+						<label for="posttype">Select Post Type</label>
+					</th>
+					<td>
+						<select name="posttype">
+<?php
+	$posttypes = get_post_types( array( 'public' => true ), 'names' );
+	foreach( $posttypes as $posttype ) :
+?>
+							<option value="<?php echo $posttype; ?>"><?php echo ucfirst( strtolower( $posttype ) ); ?></option>
+<?php
+	endforeach;
+?>
+						</select>
+					</td>
+				</tr>
+				
+			</table>
+
+			<p>Make sure you have a backup of your WordPress database before rebuilding permalinks!</p>
+			<p>
+				<input type="submit" name="submit" class="button-primary" style="width: 300px;" value="<?php _e('Rebuild Selected Permalinks'); ?>"
+							 onclick='if (!window.confirm("<?php _e('Are you sure you want to do this?'); ?>")) return false;'>
+			</p>
+
+		</form>
+		
+	</div>
+
+<?php
+}
+
+function rebuild_permalinks( $posttype = 'post' ) {
 	
 	global $wpdb;
 	
@@ -25,7 +93,7 @@ function rebuild_permalinks( $post_type = 'post' ) {
 		"SELECT id, post_title
 		FROM $wpdb->posts
 		WHERE post_status = 'publish'
-		AND post_type = '$post_type'"
+		AND posttype = '$posttype'"
 	);
 	
 	$count = 0;
@@ -73,64 +141,3 @@ function _clear_diacritics( $post_title ) {
 	return strtr($post_title, $diacritics);
 }
 
-function rebuild_permalinks_admin() {
-
-	$message = '';
-
-	if ( isset( $_POST['submit'] ) ) {
-		$count = rebuild_permalinks( $_POST['post_type'] );
-		$message = $count . 'permalinks were rebuilt for all posts of type: <strong>' . $_POST['post_type'] . '</strong>';
-	}
-?>
-
-	<div class="wrap" id="rebuild-permalinks-settings">
-		<?php screen_icon(); ?>
-		<h2><?php _e('Rebuild Permalinks'); ?></h2>
-
-<?php if ( $message !== '' ) : ?>
-		
-		<div id="message" class="updated fade">
-			<p>
-				<?php _e($message); ?>
-			</p>
-		</div>
-
-<?php endif; ?>
-		
-		<form action="" method="post" id="rebuild_permalinks_form">
-			
-			<table class="form-table">
-				
-				<tr>
-					<th scope="row">
-						<label for="post_type">Select Post Type</label>
-					</th>
-					<td>
-						<select name="post_type">
-<?php
-	$post_types = get_post_types( array( 'public' => true ), 'names' );
-	foreach( $post_types as $post_type ) :
-?>
-							<option value="<?php echo $post_type; ?>"><?php echo ucfirst( strtolower( $post_type ) ); ?></option>
-<?php
-	endforeach;
-?>
-						</select>
-					</td>
-				</tr>
-				
-			</table>
-
-			<p>Make sure you have a backup of your WordPress database before rebuilding permalinks!</p>
-			<p>
-				<input type="submit" name="submit" class="button-primary" style="width: 300px;" value="<?php _e('Rebuild Selected Permalinks'); ?>"
-							 onclick='if (!window.confirm("<?php _e('Are you sure you want to do this?'); ?>")) return false;'>
-			</p>
-
-		</form>
-		
-	</div>
-
-<?php
-}
-?>
