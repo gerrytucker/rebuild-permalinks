@@ -1,9 +1,9 @@
-=== WP-Rebuild Permalinks ===
+=== Rebuild Permalinks ===
 Contributors: gerrygooner
 Tags: rebuild, permalinks, posts, pages, attachments, database
 Requires at least: 3.0
-Tested up to: 4.2.1
-Stable tag: 0.10
+Tested up to: 4.2.2
+Stable tag: 1.0
 License: GPLv2 or later
 
 Rebuild WordPress Permalinks.
@@ -20,23 +20,19 @@ This WordPress plugin will rebuild the permalinks based on the post title for th
 
 == Installation ==
 
-1. Download WP-Rebuild Permalinks.
+1. Download Rebuild Permalinks.
 2. Unzip the ZIP archive.
 3. Upload the folder to /wp-content/plugins/.
 4. Login into your WordPress Admin Panel.
 5. Go to [Plugins/Installed].
-6. Activate the WP-Rebuild Permalinks plugin.
+6. Activate the Rebuild Permalinks plugin.
 7. Under Settings there is a new option called Rebuild Permalinks.
 
 == Frequently Asked Questions ==
 
 Have any questions? Leave them in the comments!
 
-== Screenshots ==
-
-1. WP-Rebuild Permalinks settings screen.
-
 == Changelog ==
 
-= 0.10 =
-* Development phase.
+= 1.0 =
+* Initial release.

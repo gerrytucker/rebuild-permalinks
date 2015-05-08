@@ -5,7 +5,7 @@ Plugin URI: http://gerrytucker.co.uk/wp-plugins/rebuild-permalinks.zip
 Description: Rebuild Permalinks
 Author: Gerry Tucker
 Author URI: http://gerrytucker.co.uk/
-Version: 0.10
+Version: 1.0
 License: GPLv2 or later
 */
 
@@ -37,7 +37,7 @@ function rebuild_permalinks( $posttype = 'post' ) {
 		"SELECT id, post_title
 		FROM $wpdb->posts
 		WHERE post_status = 'publish'
-		AND posttype = '$posttype'"
+		AND post_type = '$posttype'"
 	);
 	
 	$count = 0;
