@@ -32,6 +32,10 @@ This WordPress plugin will rebuild the permalinks based on the post title for th
 
 Have any questions? Leave them in the comments!
 
+== Screenshots ==
+
+1. Rebuild Permalinks settings screen.
+
 == Changelog ==
 
 = 1.0 =
